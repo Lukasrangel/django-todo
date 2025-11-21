@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -125,3 +130,14 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email
+
+
+
+EMAIL_BACKEND = "mailjet_backend.MailjetBackend"
+MAILJET_API_KEY = os.getenv("MAILJET_API_KEY")
+MAILJET_SECRET_KEY = os.getenv("MAILJET_SECRET_KEY")
+
+DEFAULT_FROM_EMAIL = os.getenv("MAILJET_FROM")

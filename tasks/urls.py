@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/<int:id>', views.deleteTask),
     path('delete/<int:id>', views.deleteTask),
     path('changestatus/<int:id>', views.changestatus),
+    path('mail', views.mail),
 ]

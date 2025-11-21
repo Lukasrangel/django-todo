@@ -5,6 +5,10 @@ from .models import Task
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 import datetime
+from .services import chamar_atencao
+
+def mail(request):
+    chamar_atencao()
 
 @login_required()
 def tasks(request):

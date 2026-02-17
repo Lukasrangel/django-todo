@@ -132,12 +132,3 @@ LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Email
-
-
-
-EMAIL_BACKEND = "mailjet_backend.MailjetBackend"
-MAILJET_API_KEY = os.getenv("MAILJET_API_KEY")
-MAILJET_SECRET_KEY = os.getenv("MAILJET_SECRET_KEY")
-
-DEFAULT_FROM_EMAIL = os.getenv("MAILJET_FROM")

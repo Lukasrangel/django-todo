@@ -9,6 +9,5 @@ urlpatterns = [
     path('edit/<int:id>', views.editTask),
     path('delete/<int:id>', views.deleteTask),
     path('delete/<int:id>', views.deleteTask),
-    path('changestatus/<int:id>', views.changestatus),
-    path('mail', views.mail),
+    path('changestatus/<int:id>', views.changestatus)
 ]

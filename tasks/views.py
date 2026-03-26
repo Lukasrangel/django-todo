@@ -5,7 +5,8 @@ from .models import Task
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 import datetime
-
+from django.utils import timezone
+from datetime import timedelta
 
 
 
@@ -19,6 +20,9 @@ def tasks(request):
     ended = Task.objects.filter(done='done', user=request.user).count()
     todo = Task.objects.filter(done='doing', user=request.user).count()
     dateEnd = Task.objects.filter(done='done', user=request.user, updated_at__gt=datetime.datetime.now()-datetime.timedelta(days=30)).count()
+    
+    oneMonth = timezone.now() - timedelta(days=30)
+    task_done_recently = Task.objects.filter(done='done', updated_at__gte=oneMonth).count()
 
     if search:
         tasks = Task.objects.filter(title__icontains=search, user=request.user).order_by('priority')
@@ -33,7 +37,7 @@ def tasks(request):
         page = request.GET.get('page')
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/list.html', {'tasks':tasks, 'ended' : ended, 'todo' : todo, 'dateEnd' : dateEnd})
+    return render(request, 'tasks/list.html', {'tasks':tasks, 'ended' : ended, 'todo' : todo, 'dateEnd' : dateEnd, 'task_done_recently' : task_done_recently})
 
 
 @login_required()
@@ -46,6 +50,7 @@ def newTask(request):
             task.done = 'doing'
             task.user = request.user
             task.save()
+            messages.info(request, "Nova Tarefa adicionada!")
             return redirect('/')
 
     else:
@@ -77,6 +82,7 @@ def editTask(request, id):
 
         if form.is_valid():
             task.save()
+            
             return redirect('/')
     
     else:
@@ -105,10 +111,13 @@ def changestatus(request, id):
 
     if task.done == 'doing':
         task.done = 'done'
+        messages.info(request, "Tarefa concluída!")
     else:
         task.done = 'doing'
+        messages.info(request, "Tarefa de volta a fazer!")
 
     task.save()
+    
     return redirect('/')
 
 

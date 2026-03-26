@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-    var baseUrl = 'http://localhost:8000'
+    var baseUrl = 'http://localhost:8000' //mudar de acordo com seu domain
     var deleteBtn = $('.deletebtn');
     var searchBtn = $('#search-btn');
     var searchForm = $('#search-form');

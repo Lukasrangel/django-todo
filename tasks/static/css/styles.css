@@ -137,6 +137,11 @@
 }
 .task-item.done {
     background-color: #CCC;
+    text-decoration: line-through;
+}
+
+.task-item span a{
+    color: black;
 }
 
 .fas.fa-trash, .fas.fa-edit, .fas.fa-check{

@@ -1,2 +1,3 @@
 python-dotenv
-django-mailjet
+django
+gunicorn

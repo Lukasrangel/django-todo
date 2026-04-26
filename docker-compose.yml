@@ -2,13 +2,18 @@ services:
     site_django_todo:
       build: .
       container_name: django_todo
-    
+      read_only: true
+      tmpfs:
+        - /tmp
+        - /run
       ports:
-        - "8000:8001"
+        - "8000:8000"
 
       volumes:
-        - .:/app
-        
+        - ./data:/app/data:rw
+        - ./static:/app/static:ro
+
+
       deploy:
         resources:
           limits:

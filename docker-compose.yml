@@ -1,0 +1,17 @@
+services:
+    site_django_todo:
+      build: .
+      container_name: django_todo
+    
+      ports:
+        - "8000:8001"
+
+      volumes:
+        - .:/app
+        
+      deploy:
+        resources:
+          limits:
+            cpus: '0.50'
+            memory: 96M
+      restart: always
